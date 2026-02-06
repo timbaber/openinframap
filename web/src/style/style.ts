@@ -69,6 +69,14 @@ const style: StyleSpecification = {
       attribution:
         '<a href="https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/VNP46A4/">NASA Black Marble 2024</a>'
     },
+    satellite: {
+      type: 'raster',
+      tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+      tileSize: 256,
+      maxzoom: 19,
+      attribution:
+        '&copy; <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics, and the GIS User Community'
+    },
     power: {
       type: 'vector',
       tiles: ['https://openinframap.org/map/power/{z}/{x}/{y}.pbf'],

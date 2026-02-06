@@ -10,5 +10,8 @@
         "power": {
             "substation": "Trafo merkezi"
         }
+    },
+    "layers": {
+        "satellite": "Uydu"
     }
 }

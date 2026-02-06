@@ -36,26 +36,6 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
--- Select the highest voltage from a semicolon-delimited list
-CREATE OR REPLACE FUNCTION convert_voltage(value TEXT) RETURNS NUMERIC
-IMMUTABLE
-PARALLEL SAFE
-RETURNS NULL ON NULL INPUT
-AS $$
-  SELECT value FROM convert_integer_list(value) ORDER BY value DESC LIMIT 1;
-$$ LANGUAGE SQL;
-
--- Convert a semicolon-delimited list of integers into a table of integer voltages.
-CREATE OR REPLACE FUNCTION convert_integer_list(value TEXT) RETURNS TABLE (value INTEGER)
-IMMUTABLE
-PARALLEL SAFE
-RETURNS NULL ON NULL INPUT
-AS $$
-    SELECT convert_integer(v) AS voltage
-        FROM regexp_split_to_table(value, ';') AS v
-        WHERE convert_integer(v) IS NOT NULL;
-$$ LANGUAGE SQL;
-
 -- Convert a text numeric value into a number. Both the period (.) and the comma (,)
 -- are accepted as decimal separators.
 -- Trailing text is discarded. Leading text, or any other invalid value, results in a NULL.
@@ -88,6 +68,26 @@ BEGIN
     RETURN parts[1];
 END
 $$ LANGUAGE plpgsql;
+
+-- Convert a semicolon-delimited list of integers into a table of integer voltages.
+CREATE OR REPLACE FUNCTION convert_integer_list(value TEXT) RETURNS TABLE (value INTEGER)
+IMMUTABLE
+PARALLEL SAFE
+RETURNS NULL ON NULL INPUT
+AS $$
+    SELECT convert_integer(v) AS voltage
+        FROM regexp_split_to_table(value, ';') AS v
+        WHERE convert_integer(v) IS NOT NULL;
+$$ LANGUAGE SQL;
+
+-- Select the highest voltage from a semicolon-delimited list
+CREATE OR REPLACE FUNCTION convert_voltage(value TEXT) RETURNS NUMERIC
+IMMUTABLE
+PARALLEL SAFE
+RETURNS NULL ON NULL INPUT
+AS $$
+  SELECT value FROM convert_integer_list(value) ORDER BY value DESC LIMIT 1;
+$$ LANGUAGE SQL;
 
 -- Get the nth element of a semicolon-delimited list
 CREATE OR REPLACE FUNCTION nth_semi(input TEXT, index INTEGER) RETURNS TEXT

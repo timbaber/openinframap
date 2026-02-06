@@ -221,7 +221,8 @@
     "labels": "Labels",
     "title": "Layers",
     "other-pipelines": "Other Pipelines",
-    "osmose-power": "Osmose (Power)"
+    "osmose-power": "Osmose (Power)",
+    "satellite": "Satellite"
   },
   "construction": "under construction",
   "disused": "disused",

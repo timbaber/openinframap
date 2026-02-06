@@ -618,6 +618,11 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
+    id: 'satellite_background',
+    type: 'raster',
+    source: 'satellite'
+  },
+  {
     id: 'black_marble_background',
     type: 'background',
     paint: {

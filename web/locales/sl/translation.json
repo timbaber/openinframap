@@ -75,7 +75,8 @@
         "petroleum": "Nafta in plin",
         "water": "Voda",
         "labels": "Napisi",
-        "title": "Sloji"
+        "title": "Sloji",
+        "satellite": "Satelit"
     },
     "construction": "v gradnji"
 }

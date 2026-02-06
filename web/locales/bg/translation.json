@@ -79,7 +79,8 @@
         "labels": "Етикети",
         "water": "Вода",
         "petroleum": "Нефт и природен газ",
-        "borders": "Граници"
+        "borders": "Граници",
+        "satellite": "Сателит"
     },
     "search": {
         "no-results": "Няма резултати",

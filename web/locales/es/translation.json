@@ -206,7 +206,8 @@
         "solar-generation": "Generación solar",
         "borders": "Fronteras",
         "other-pipelines": "Otras tuberías",
-        "osmose-power": "Osmose (Electricidad)"
+        "osmose-power": "Osmose (Electricidad)",
+        "satellite": "Satélite"
     },
     "warning": "Aviso",
     "wikidata": "Wikidata",

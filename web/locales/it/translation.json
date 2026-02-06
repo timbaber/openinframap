@@ -187,7 +187,8 @@
         "water": "Acqua",
         "telecoms": "Telecomunicazioni",
         "labels": "Etichette",
-        "title": "Livelli"
+        "title": "Livelli",
+        "satellite": "Satellite"
     },
     "construction": "in costruzione",
     "other": "Altro",

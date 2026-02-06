@@ -109,7 +109,8 @@
         "petroleum": "Olje og gass",
         "water": "Vann",
         "labels": "Merkelapper",
-        "title": "Lag"
+        "title": "Lag",
+        "satellite": "Satellitt"
     },
     "info": {
         "location": "Plassering",

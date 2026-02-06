@@ -80,7 +80,8 @@
         "water": "Water",
         "petroleum": "Olie & Gas",
         "labels": "Labels",
-        "title": "Lagen"
+        "title": "Lagen",
+        "satellite": "Satelliet"
     },
     "power": {
         "source": {

@@ -7,16 +7,25 @@ volumes:
 services:
   db:
     image: postgis/postgis:17-3.4-alpine
-    shm_size: 128mb
+    shm_size: 1024mb
     environment:
       POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./schema/dev-init.sql:/docker-entrypoint-initdb.d/90-dev-init.sql
       - ./schema/functions.sql:/docker-entrypoint-initdb.d/91-functions.sql
+      - ./schema/views.sql:/schema/views.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   imposm:
     build: imposm
+    depends_on:
+      db:
+        condition: service_healthy
     volumes:
       - imposm_cache:/imposm-cache
       - imposm_expiry:/imposm-expiry
@@ -36,6 +45,10 @@ services:
   
   tegola:
     build: tegola
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
     environment:
       DB_URI: "postgres://osm:osm@db:5432/osm"
     ports:

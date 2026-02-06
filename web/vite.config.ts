@@ -23,6 +23,16 @@ export default defineConfig({
     fs: {
       // Allow serving files from one level up to the project root
       allow: ['..']
+    },
+    proxy: {
+      '/stats': 'http://localhost:8081',
+      '/about': 'http://localhost:8081',
+      '/copyright': 'http://localhost:8081',
+      '/search': 'http://localhost:8081',
+      '/wikidata': 'http://localhost:8081',
+      '/heatmap.json': 'http://localhost:8081',
+      '/sitemap.xml': 'http://localhost:8081',
+      '/static': 'http://localhost:8081'
     }
   },
 

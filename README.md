@@ -1,19 +1,35 @@
-[![IRC](https://img.shields.io/badge/IRC-%23osm--infrastructure-brightgreen)](https://webchat.oftc.net/?channels=osm-infrastructure)
-[![Matrix](https://img.shields.io/matrix/osm-infrastructure:matrix.org?server_fqdn=matrix.org&logo=matrix)](https://matrix.to/#/#osm-infrastructure:matrix.org)
-[![Mastodon](https://img.shields.io/badge/dynamic/json?label=Mastodon&color=6364ff&query=followers_count&url=https://en.osm.town/api/v1/accounts/lookup?acct=OpenInfraMap&logo=mastodon)](https://en.osm.town/@OpenInfraMap)
+# Open Infrastructure Map (Fork)
 
-# Open Infrastructure Map
-This is the main repository for [Open Infrastructure Map](https://openinframap.org), a map showing the world's
+This is a fork of [Open Infrastructure Map](https://github.com/openinframap/openinframap), a map showing the world's
 infrastructure from [OpenStreetMap](https://www.openstreetmap.org).
 
 ![Screenshot of OpenInfraMap](./docs/screenshots/main.png)
 
-## Translations
-We're aiming to make OpenInfraMap multilingual - if you can help translate, please
-[contribute on Weblate](https://hosted.weblate.org/engage/open-infrastructure-map/).
-[![Translation status](https://hosted.weblate.org/widget/open-infrastructure-map/multi-auto.svg)](https://hosted.weblate.org/engage/open-infrastructure-map/)
+## Changes from upstream
 
-Anyone can add a new language to Weblate - once the translation is more than 75% complete, please raise [an issue](https://github.com/openinframap/openinframap/issues) so we can enable it on the website.
+- **Satellite imagery background** -- Added ESRI World Imagery as a selectable background layer in the layer switcher, alongside the existing OpenStreetMap and Nighttime Lights options. Translations included for all 24 supported locales.
+- **Docker dev environment fixes** -- Fixed database initialization (extension permissions, SQL function ordering) and service startup race conditions so `docker compose up` works reliably from a clean state.
+- **Automated dev setup** -- Added `dev-setup.sh` to automate the full local development pipeline: downloading an OSM extract, importing data, creating database views, and starting all services.
+
+## Quick start
+
+```bash
+# Clone and set up (defaults to Texas OSM extract):
+./dev-setup.sh
+
+# Or use a custom Geofabrik region:
+./dev-setup.sh https://download.geofabrik.de/europe/monaco-latest.osm.pbf
+
+# Start the web frontend:
+cd web && npm install && npm run dev
+```
+
+## Upstream links
+
+- [Open Infrastructure Map](https://openinframap.org)
+- [Upstream repository](https://github.com/openinframap/openinframap)
+- [IRC: #osm-infrastructure](https://webchat.oftc.net/?channels=osm-infrastructure) | [Matrix](https://matrix.to/#/#osm-infrastructure:matrix.org)
+- [Translations on Weblate](https://hosted.weblate.org/engage/open-infrastructure-map/)
 
 ## Development
 For details on how to develop Open Infrastructure Map, see the [architecture documentation](./docs/architecture.md).

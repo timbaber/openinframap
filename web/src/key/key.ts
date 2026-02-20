@@ -74,8 +74,17 @@ class KeyControl implements IControl {
 
     this._control.onclick = () => {
       const button_position = this._control.getBoundingClientRect()
-      this._container.style.top = button_position.top + 'px'
-      this._container.style.right = document.documentElement.clientWidth - button_position.right + 'px'
+      const panel_height = 70 * window.innerHeight / 100
+      const space_below = window.innerHeight - button_position.bottom
+      const open_down = space_below >= panel_height || space_below >= button_position.top
+      if (open_down) {
+        this._container.style.top = button_position.bottom + 'px'
+        this._container.style.bottom = 'auto'
+      } else {
+        this._container.style.bottom = (window.innerHeight - button_position.top) + 'px'
+        this._container.style.top = 'auto'
+      }
+      this._container.style.right = (document.documentElement.clientWidth - button_position.right) + 'px'
       this._container.classList.add('visible')
     }
 
@@ -147,7 +156,7 @@ class KeyControl implements IControl {
 
     rows = rows.map((row) => [row[0], svgLine(row[1], line_thickness)])
 
-    rows.push([t('location.underground', 'Underground'), svgLine('#7A7A85', line_thickness, '3 2')])
+    rows.push([t('location.underground', 'Underground'), svgLine('#b0b0b8', line_thickness, '3 2')])
     rows.push([t('names.power.line-reference', 'Line reference'), await this.sprite('power_line_ref')])
 
     const table = list('table', Tr)

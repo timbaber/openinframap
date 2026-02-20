@@ -1,0 +1,18 @@
+feat: power filters, imagery overlay, and UI modernization
+
+- Add granular power filters (Power filters control)
+  - Power plants: filter by Solar, Wind, Coal, Gas, Nuclear, Hydro
+  - Substations: filter by Transmission, Distribution, Traction, DC Converter, Transition, Other
+  - Power lines: filter by voltage band (<10 kV through 345+ kV, HVDC, Traction)
+- Color-code power plants by source on the map (fill and outlines)
+- Add map imagery overlay (bottom-left): shows basemap source and capture-date info for OSM, Esri World Imagery, and NASA Black Marble; updates when background layer changes
+- Modernize map and filter controls
+  - Card-style panels (shadow, border, backdrop blur, 10px radius) for control groups, layer switcher, search, key, edit
+  - Filter panel: section headers with chevrons, accent-colored checkboxes, clearer hierarchy
+  - Design tokens: --oim-ctrl-bg, --oim-ctrl-shadow, --oim-ctrl-accent, etc.
+- Fix filter panel layout: wrap header labels in spans, allow text to wrap (flex + min-width: 0, overflow-wrap), increase min-width to 15rem to prevent truncation
+- Dev setup: run create_indexes.py after stack bring-up for typeahead search; document search indexes and re-import in README
+- Add test:e2e script (start-server-and-test) and document test expectations in README and web/README
+- Document clean re-import and schema init order in schema/README
+- Add docs/satellite-imagery.md (imagery freshness, optional provider swap)
+- i18n: filters.*, imagery.* in EN, DE, FR, ES

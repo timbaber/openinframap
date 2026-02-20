@@ -1,6 +1,6 @@
 .tab-pane {
   --active-tab-background-color: var(--oim-light-grey);
-  --inactive-tab-background-color: #fafafa;
+  --inactive-tab-background-color: var(--oim-content-background);
   --active-tab-border-color: var(--oim-grey);
   --inactive-tab-border-color: var(--oim-grey);
 }

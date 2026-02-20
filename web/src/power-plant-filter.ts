@@ -4,7 +4,7 @@ import { el } from 'redom'
 import type { FilterSpecification } from 'maplibre-gl'
 
 /** Map layer IDs that show power plants and take a source filter */
-const POWER_PLANT_LAYER_IDS = [
+export const POWER_PLANT_LAYER_IDS = [
   'power_plant',
   'power_plant_outline',
   'power_plant_outline_underground',
@@ -13,7 +13,7 @@ const POWER_PLANT_LAYER_IDS = [
 ] as const
 
 /** Map layer IDs that show substations and take a substation-type filter */
-const SUBSTATION_LAYER_IDS = [
+export const SUBSTATION_LAYER_IDS = [
   'power_substation',
   'power_substation_outline',
   'power_substation_outline_underground',
@@ -53,7 +53,7 @@ const SUBSTATION_OPTIONS: { id: string; labelKey: string }[] = [
 ]
 
 /** Power line layers (filter by voltage/rating) */
-const POWER_LINE_LAYER_IDS = [
+export const POWER_LINE_LAYER_IDS = [
   'power_line_case',
   'power_line_underground_1',
   'power_line_underground_2',
@@ -87,6 +87,18 @@ const VOLTAGE_BAND_OPTIONS: {
 const DEFAULT_PLANT_SELECTED = new Set(SOURCE_OPTIONS.map((o) => o.id))
 const DEFAULT_SUBSTATION_SELECTED = new Set(SUBSTATION_OPTIONS.map((o) => o.id))
 const DEFAULT_VOLTAGE_BAND_SELECTED = new Set(VOLTAGE_BAND_OPTIONS.map((o) => o.id))
+
+export {
+  SOURCE_OPTIONS,
+  SUBSTATION_OPTIONS,
+  VOLTAGE_BAND_OPTIONS,
+  applyPlantFilters,
+  applySubstationFilters,
+  applyPowerLineFilters,
+  DEFAULT_PLANT_SELECTED,
+  DEFAULT_SUBSTATION_SELECTED,
+  DEFAULT_VOLTAGE_BAND_SELECTED
+}
 
 function buildSourceFilter(selectedDataSources: string[]): FilterSpecification | null {
   if (selectedDataSources.length === 0) return null

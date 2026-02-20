@@ -19,13 +19,13 @@ ul.oim-elements li {
 ul.oim-elements li.add::before {
   content: '+';
   font-weight: bold;
-  color: #00a000;
+  color: #4ade80;
   padding-inline-start: 0.3em;
   padding-inline-end: 0.3em;
 }
 
 ul.oim-elements li.add {
-  background: #f3fff3;
+  background: rgba(74, 222, 128, 0.15);
 }
 
 ul.oim-elements span.key {

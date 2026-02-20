@@ -191,6 +191,7 @@
     },
     "other": "Otros",
     "filters": {
+        "hide": "Ocultar",
         "power-plants": "Centrales eléctricas",
         "substations": "Subestaciones",
         "power-lines": "Líneas (tensión)",
@@ -244,9 +245,10 @@
         "validation": "Validación",
         "solar-generation": "Generación solar",
         "borders": "Fronteras",
-        "other-pipelines": "Otras tuberías",
-        "osmose-power": "Osmose (Electricidad)",
-        "satellite": "Satélite"
+    "other-pipelines": "Otras tuberías",
+    "osmose-power": "Osmose (Electricidad)",
+    "satellite": "Satélite",
+    "pipelines-and-utilities": "Redes y servicios"
     },
     "warning": "Aviso",
     "wikidata": "Wikidata",

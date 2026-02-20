@@ -197,6 +197,7 @@
         "webgl": "<p>Dein Browser hat möglicherweise eine eingeschränkte Leistung oder fehlende Funktionen von Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> mit Hardware-Beschelunigung wird für die volle Funktionalität benötigt.</p><p>Wenn dein Browser WebGL unterstützt, musst du möglicherweise den Fingerprinting-Schutz des Browsers für diese Seite deaktivieren.</p>"
     },
     "filters": {
+        "hide": "Ausblenden",
         "power-plants": "Kraftwerke",
         "substations": "Umspannwerke",
         "power-lines": "Starkstromleitungen (Spannung)",
@@ -250,6 +251,7 @@
         "solar-generation": "Sonnenerzeugung",
         "osmose-power": "Osmose (Energie)",
         "satellite": "Satellit",
+        "pipelines-and-utilities": "Leitungen & Versorgung",
         "heatmaps": "Heatmaps",
         "borders": "Grenzen",
         "overlays": "Überlagerungen"

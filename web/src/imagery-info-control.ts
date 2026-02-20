@@ -43,23 +43,35 @@ function buildContent(type: BackgroundType): { source: string; date: string } {
 export default class ImageryInfoControl implements maplibregl.IControl {
   _map?: maplibregl.Map
   _container!: HTMLDivElement
+  _pill!: HTMLButtonElement
   _inner!: HTMLDivElement
   _sourceEl!: HTMLElement
   _dateEl!: HTMLElement
   _pollTimer: ReturnType<typeof setInterval> | null = null
+  _expanded = false
 
   onAdd(map: maplibregl.Map): HTMLElement {
     this._map = map
 
-    const title = el('div', t('imagery.title', 'Map imagery'), { class: 'oim-imagery-title' })
+    const pillLabel = el('span', t('imagery.title', 'Map imagery'), { class: 'oim-imagery-pill-label' })
+    this._pill = el('button', pillLabel, {
+      class: 'oim-imagery-pill',
+      type: 'button',
+      'aria-label': t('imagery.title', 'Map imagery'),
+      'aria-expanded': 'false'
+    }) as HTMLButtonElement
+    this._pill.addEventListener('click', (e) => {
+      e.stopPropagation()
+      this._setExpanded(!this._expanded)
+    })
+
     this._sourceEl = el('div', { class: 'oim-imagery-source' })
     this._dateEl = el('div', { class: 'oim-imagery-date' })
-
-    this._inner = el('div', title, this._sourceEl, this._dateEl, {
+    this._inner = el('div', this._sourceEl, this._dateEl, {
       class: 'oim-imagery-info-inner'
     })
 
-    this._container = el('div', this._inner, {
+    this._container = el('div', [this._pill, this._inner], {
       class: 'maplibregl-ctrl oim-imagery-info'
     })
 
@@ -70,6 +82,12 @@ export default class ImageryInfoControl implements maplibregl.IControl {
     setTimeout(update, 100)
 
     return this._container
+  }
+
+  _setExpanded(expanded: boolean): void {
+    this._expanded = expanded
+    this._container.classList.toggle('oim-imagery-info-expanded', expanded)
+    this._pill.setAttribute('aria-expanded', String(expanded))
   }
 
   _update() {
@@ -86,6 +104,8 @@ export default class ImageryInfoControl implements maplibregl.IControl {
     this._sourceEl.textContent = source
     this._dateEl.textContent = date
     this._container.classList.add('oim-imagery-info-visible')
+    // Keep expanded state in sync if user had expanded; default remains collapsed
+    this._container.classList.toggle('oim-imagery-info-expanded', this._expanded)
   }
 
   onRemove(): void {

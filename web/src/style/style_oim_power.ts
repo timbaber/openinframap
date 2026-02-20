@@ -1307,6 +1307,10 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       },
       paint: {
         ...text_paint,
+        /* One combo that works on all basemaps (satellite, OSM, nighttime): light text + dark halo */
+        'text-color': 'hsla(0, 0%, 98%, 0.98)',
+        'text-halo-color': 'hsla(0, 0%, 8%, 0.9)',
+        'text-halo-width': 9,
         'icon-opacity': ['step', zoom, if_(construction_p, 0.5, 1), 13, 0]
       }
     }

@@ -191,6 +191,7 @@
     "wikimedia-commons": "Wikimedia Commons",
     "warning": "Avertissement",
     "filters": {
+        "hide": "Masquer",
         "power-plants": "Centrales électriques",
         "substations": "Sous-stations",
         "power-lines": "Lignes (tension)",
@@ -245,6 +246,7 @@
         "overlays": "Surcouches",
         "osmose-power": "Osmose (Électricité)",
         "satellite": "Satellite",
+        "pipelines-and-utilities": "Canalisations et réseaux",
         "solar-generation": "Solaire",
         "borders": "Frontières"
     },

@@ -6,36 +6,41 @@
 
   input {
     color: var(--oim-text-color);
-
-    background-color: rgba(252, 252, 252, 0.6);
+    background-color: var(--oim-ctrl-bg, rgba(252, 252, 252, 0.95));
     background-image: url(./assets/search.svg);
     background-repeat: no-repeat;
     background-size: 1.2em;
     background-position-y: center;
-    background-position-x: 5px;
-
-    border: 1px solid var(--oim-grey);
-    border-radius: var(--oim-radius-large);
-    height: 2.2rem;
-    font-size: 1.2rem;
-    padding: 0.5em 25px 0.5em 2em;
+    background-position-x: 10px;
+    border: 1px solid var(--oim-ctrl-border, rgba(0, 0, 0, 0.08));
+    border-radius: 10px;
+    box-shadow: var(--oim-ctrl-shadow, 0 2px 12px rgba(0, 0, 0, 0.12));
+    height: 2.25rem;
+    font-size: 0.95rem;
+    padding: 0.5em 12px 0.5em 2.25em;
     width: 100%;
     backdrop-filter: var(--oim-blur);
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
 
   input:focus {
     background-color: var(--oim-content-background);
+    outline: none;
+    border-color: var(--oim-ctrl-accent, #2563eb);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
   }
 }
 
 .oim-search-dropdown {
-  background-color: var(--oim-content-background);
-  border-radius: var(--oim-radius-small);
-  box-shadow: var(--oim-drop-shadow);
+  background: var(--oim-ctrl-bg, rgba(255, 255, 255, 0.98));
+  border: 1px solid var(--oim-ctrl-border, rgba(0, 0, 0, 0.08));
+  border-radius: 10px;
+  box-shadow: var(--oim-ctrl-shadow, 0 2px 12px rgba(0, 0, 0, 0.12));
   max-height: 80vh;
   max-width: min(70vw, 30em);
   overflow-y: hidden;
-  margin-top: 0.1em;
+  margin-top: 4px;
+  backdrop-filter: var(--oim-blur);
 
   ol {
     padding: 0;

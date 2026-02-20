@@ -190,6 +190,45 @@
         }
     },
     "other": "Otros",
+    "filters": {
+        "power-plants": "Centrales eléctricas",
+        "substations": "Subestaciones",
+        "power-lines": "Líneas (tensión)",
+        "power-filters": "Filtros de red",
+        "substation-type": {
+            "transmission": "Transmisión",
+            "distribution": "Distribución",
+            "traction": "Traction",
+            "converter": "Convertidor DC",
+            "transition": "Transición",
+            "other": "Otro"
+        },
+        "voltage-band": {
+            "under-10": "< 10 kV",
+            "10-52": "10–52 kV",
+            "52-132": "52–132 kV",
+            "132-220": "132–220 kV",
+            "220-345": "220–345 kV",
+            "345-plus": "345+ kV",
+            "hvdc": "HVDC",
+            "traction": "Traction (< 50 Hz)"
+        }
+    },
+    "imagery": {
+        "title": "Imagen del mapa",
+        "satellite": {
+            "source": "Esri World Imagery (Maxar, Earthstar Geographics, GIS User Community)",
+            "date": "Las fechas de captura varían por ubicación; Esri actualiza la imagen periódicamente."
+        },
+        "black-marble": {
+            "source": "NASA Black Marble 2024",
+            "date": "Composición anual; ver NASA para detalles del producto."
+        },
+        "osm": {
+            "source": "OpenStreetMap",
+            "date": "© Colaboradores de OpenStreetMap."
+        }
+    },
     "layers": {
         "power": "Electricidad",
         "water": "Agua",

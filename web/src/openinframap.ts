@@ -7,6 +7,8 @@ import { LayerSwitcher, URLHash, Layer, LayerGroup } from '@russss/maplibregl-la
 import EditButton from './edit-control.js'
 import InfoPopup from './popup/infopopup.js'
 import KeyControl from './key/key.js'
+import PowerPlantFilterControl from './power-plant-filter.js'
+import ImageryInfoControl from './imagery-info-control.js'
 import WarningBox from './warning-box/warning-box.js'
 import OIMSearch from './search/search.ts'
 
@@ -114,9 +116,11 @@ export default class OpenInfraMap {
     )
 
     map.addControl(new maplibregl.ScaleControl({}), 'bottom-left')
+    map.addControl(new ImageryInfoControl(), 'bottom-left')
 
     map.addControl(new KeyControl(), 'top-right')
     map.addControl(layer_switcher, 'top-right')
+    map.addControl(new PowerPlantFilterControl(), 'top-right')
     map.addControl(new EditButton(), 'bottom-right')
     map.addControl(new OIMSearch(), 'top-left')
     new InfoPopup(

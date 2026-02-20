@@ -19,8 +19,10 @@ get started.
 Code style is checked using [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/). To
 run the linting checks, use `npm run lint`.
 
-There is currently a minimal test suite using [Vitest](https://vitest.dev/) which is run using
-`npm test`. This requires the development server to be running.
+There is a minimal test suite using [Vitest](https://vitest.dev/) and Puppeteer:
+
+- **`npm run test`** — runs tests against http://localhost:5173 (start the dev server first in another terminal).
+- **`npm run test:e2e`** — starts the dev server, runs tests, then exits (one-shot e2e).
 
 ## Translation
 

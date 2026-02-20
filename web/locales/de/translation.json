@@ -196,6 +196,45 @@
     "warnings": {
         "webgl": "<p>Dein Browser hat möglicherweise eine eingeschränkte Leistung oder fehlende Funktionen von Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> mit Hardware-Beschelunigung wird für die volle Funktionalität benötigt.</p><p>Wenn dein Browser WebGL unterstützt, musst du möglicherweise den Fingerprinting-Schutz des Browsers für diese Seite deaktivieren.</p>"
     },
+    "filters": {
+        "power-plants": "Kraftwerke",
+        "substations": "Umspannwerke",
+        "power-lines": "Starkstromleitungen (Spannung)",
+        "power-filters": "Strom-Filter",
+        "substation-type": {
+            "transmission": "Übertragung",
+            "distribution": "Verteilung",
+            "traction": "Traction",
+            "converter": "Gleichrichter",
+            "transition": "Übergang",
+            "other": "Sonstige"
+        },
+        "voltage-band": {
+            "under-10": "< 10 kV",
+            "10-52": "10–52 kV",
+            "52-132": "52–132 kV",
+            "132-220": "132–220 kV",
+            "220-345": "220–345 kV",
+            "345-plus": "345+ kV",
+            "hvdc": "HGÜ",
+            "traction": "Traction (< 50 Hz)"
+        }
+    },
+    "imagery": {
+        "title": "Kartenbild",
+        "satellite": {
+            "source": "Esri World Imagery (Maxar, Earthstar Geographics, GIS User Community)",
+            "date": "Aufnahmedaten variieren je Ort; Esri aktualisiert die Bilddaten regelmäßig."
+        },
+        "black-marble": {
+            "source": "NASA Black Marble 2024",
+            "date": "Jahreskomposit; siehe NASA für Produktdetails."
+        },
+        "osm": {
+            "source": "OpenStreetMap",
+            "date": "© OpenStreetMap-Mitwirkende."
+        }
+    },
     "layers": {
         "power": "Energie",
         "telecoms": "Telekommunikation",

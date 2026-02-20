@@ -190,6 +190,45 @@
     },
     "wikimedia-commons": "Wikimedia Commons",
     "warning": "Avertissement",
+    "filters": {
+        "power-plants": "Centrales électriques",
+        "substations": "Sous-stations",
+        "power-lines": "Lignes (tension)",
+        "power-filters": "Filtres électricité",
+        "substation-type": {
+            "transmission": "Transport",
+            "distribution": "Distribution",
+            "traction": "Traction",
+            "converter": "Convertisseur DC",
+            "transition": "Transition",
+            "other": "Autre"
+        },
+        "voltage-band": {
+            "under-10": "< 10 kV",
+            "10-52": "10–52 kV",
+            "52-132": "52–132 kV",
+            "132-220": "132–220 kV",
+            "220-345": "220–345 kV",
+            "345-plus": "345+ kV",
+            "hvdc": "HVDC",
+            "traction": "Traction (< 50 Hz)"
+        }
+    },
+    "imagery": {
+        "title": "Imagerie de la carte",
+        "satellite": {
+            "source": "Esri World Imagery (Maxar, Earthstar Geographics, GIS User Community)",
+            "date": "Les dates de capture varient selon l'emplacement ; Esri met à jour l'imagerie périodiquement."
+        },
+        "black-marble": {
+            "source": "NASA Black Marble 2024",
+            "date": "Composite annuel ; voir NASA pour les détails du produit."
+        },
+        "osm": {
+            "source": "OpenStreetMap",
+            "date": "© Contributeurs OpenStreetMap."
+        }
+    },
     "layers": {
         "title": "Couches",
         "telecoms": "Télécommunications",

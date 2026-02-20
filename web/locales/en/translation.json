@@ -205,6 +205,45 @@
   "warnings": {
     "webgl": "<p>Your browser may have performance or functionality issues with Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> with hardware acceleration is required for this site to perform well.</p><p>If your browser supports WebGL, you may need to disable browser fingerprinting protection for this site.</p>"
   },
+  "filters": {
+    "power-plants": "Power plants",
+    "substations": "Substations",
+    "power-lines": "Power lines (voltage)",
+    "power-filters": "Power filters",
+    "substation-type": {
+      "transmission": "Transmission",
+      "distribution": "Distribution",
+      "traction": "Traction",
+      "converter": "DC Converter",
+      "transition": "Transition",
+      "other": "Other"
+    },
+    "voltage-band": {
+      "under-10": "< 10 kV",
+      "10-52": "10–52 kV",
+      "52-132": "52–132 kV",
+      "132-220": "132–220 kV",
+      "220-345": "220–345 kV",
+      "345-plus": "345+ kV",
+      "hvdc": "HVDC",
+      "traction": "Traction (< 50 Hz)"
+    }
+  },
+  "imagery": {
+    "title": "Map imagery",
+    "satellite": {
+      "source": "Esri World Imagery (Maxar, Earthstar Geographics, GIS User Community)",
+      "date": "Capture dates vary by location; imagery is updated periodically by Esri."
+    },
+    "black-marble": {
+      "source": "NASA Black Marble 2024",
+      "date": "Annual composite; see NASA for product details."
+    },
+    "osm": {
+      "source": "OpenStreetMap",
+      "date": "© OpenStreetMap contributors."
+    }
+  },
   "layers": {
     "background": "Background",
     "heatmaps": "Heatmaps",

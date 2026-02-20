@@ -52,6 +52,11 @@ docker compose exec -T db psql -U osm -d osm -f /schema/views.sql
 echo "==> Starting all services ..."
 docker compose up -d
 
+# Step 7: Create search indexes (for typeahead search; safe to re-run)
+echo "==> Creating search indexes ..."
+docker compose run --rm -e ADMIN_DATABASE_URL="postgresql://osm:osm@db:5432/osm" web-backend uv run python create_indexes.py
+
 echo ""
 echo "==> Done! The stack is running."
 echo "    Tegola tile server: http://localhost:8080"
+echo "    Web backend:        http://localhost:8081"

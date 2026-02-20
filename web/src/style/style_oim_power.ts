@@ -61,6 +61,30 @@ export const plant_types = {
   battery: 'power_plant_battery'
 }
 
+/** Fill colors for power plants by source (for map color-coding) */
+export const plant_source_colors: Record<string, string> = {
+  solar: '#E6B800',
+  wind: '#4A90D9',
+  coal: '#2C3E50',
+  gas: '#E67E22',
+  oil: '#E67E22',
+  diesel: '#E67E22',
+  nuclear: '#27AE60',
+  hydro: '#3498DB',
+  tidal: '#3498DB',
+  wave: '#3498DB',
+  geothermal: '#9B59B6',
+  biomass: '#795548',
+  waste: '#7F8C8D',
+  battery: '#1ABC9C'
+}
+const plant_source_fill_color: ExpressionSpecification = [
+  'match',
+  get('source'),
+  ...Object.entries(plant_source_colors).flat(),
+  'hsl(30, 20%, 35%)' // default
+]
+
 // Zoom level at which substation labels switch from centroid to outline placement.
 const substation_label_switch_zoom = 16
 const multi_voltage_min_zoom = 10
@@ -461,7 +485,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       minzoom: 5,
       'source-layer': 'power_plant',
       paint: {
-        'fill-color': 'hsl(30, 20%, 35%)',
+        'fill-color': plant_source_fill_color,
         'fill-opacity': if_(construction_p, 0.05, 0.2)
       }
     },
@@ -474,7 +498,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       minzoom: 8,
       'source-layer': 'power_plant',
       paint: {
-        'line-color': rgb(30, 30, 30),
+        'line-color': plant_source_fill_color,
         'line-opacity': 0.8,
         'line-width': interpolate(
           zoom,
@@ -498,7 +522,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       minzoom: 8,
       'source-layer': 'power_plant',
       paint: {
-        'line-color': rgb(30, 30, 30),
+        'line-color': plant_source_fill_color,
         'line-opacity': 0.8,
         'line-width': interpolate(zoom, [
           [13, 0.5],

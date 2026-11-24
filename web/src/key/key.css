@@ -1,7 +1,7 @@
-/* Key icon: light stroke so it’s visible on dark control background (do not invert) */
+/* Key trigger icon: light stroke on dark control background */
 .oim-key-control {
-  min-height: 30px;
-  min-width: 30px;
+  min-height: var(--oim-hit);
+  min-width: var(--oim-hit);
   filter: none !important;
   background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="%23e5e5e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>')
     var(--oim-ctrl-bg);
@@ -10,103 +10,50 @@
   background-position: center;
 }
 
-.oim-key-panel {
-  display: none;
-  position: absolute;
-  overflow: hidden;
-  border-radius: 10px;
-  bottom: auto;
-  background: var(--oim-ctrl-bg);
-  border: 1px solid var(--oim-ctrl-border);
-  z-index: 1000;
-  min-width: 220px;
-  max-height: 70vh;
-  min-height: 200px;
-  margin: 0 !important;
-  box-shadow: var(--oim-ctrl-shadow);
-  backdrop-filter: var(--oim-blur);
-}
-
-.oim-key-panel.visible {
-  display: flex;
-  flex-direction: column;
-}
-
-.oim-key-header {
-  flex-shrink: 0;
-  height: 2.2em;
-  padding-top: 0.3em;
-  padding-left: 8px;
-  background-color: var(--oim-light-grey);
-}
-
-.oim-key-header h2 {
-  margin: 0px;
-  display: inline;
-}
-
-.oim-key-close {
-  background-color: var(--oim-light-grey);
-  width: 29px;
-  height: 29px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  border: 0;
-  font-weight: bold;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-.oim-key-close:hover {
-  background-color: var(--oim-grey);
-}
-
-.oim-key-body {
-  position: relative;
-  top: 0;
-  width: 100%;
-  flex: 1 1 0;
-  min-height: 0;
-  padding: 0.5em 0.2em 0.5em 0.5em;
-  overflow-y: auto;
-}
-
-.oim-key-body h3 {
-  margin-top: 0;
-  margin-bottom: 3px;
-  border-bottom: 1px var(--oim-light-grey) solid;
+/* Float panel body content */
+.oim-key-panel .oim-panel-body h3 {
+  margin: var(--oim-space-3) 0 var(--oim-space-2);
+  padding-bottom: var(--oim-space-1);
+  border-bottom: 1px solid var(--oim-ctrl-border);
   clear: both;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--oim-text-color-light);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
-.oim-key-body table {
+.oim-key-panel .oim-panel-body h3:first-child {
+  margin-top: 0;
+}
+
+.oim-key-panel .oim-panel-body table {
   width: 100%;
-  padding: 0px;
-  margin-bottom: 0.5em;
+  padding: 0;
+  margin-bottom: var(--oim-space-3);
+  border-collapse: collapse;
 }
 
-.oim-key-body table tr {
-  padding: 0px;
+.oim-key-panel .oim-panel-body table tr td {
+  height: 32px;
+  padding: var(--oim-space-1) 0;
+  vertical-align: middle;
 }
 
-.oim-key-body table td {
-  height: 26px;
-}
-
-.oim-key-body table tr td:nth-child(2) {
-  width: 30px;
-  padding: 0 0 0 1em;
+.oim-key-panel .oim-panel-body table tr td:nth-child(2) {
+  width: 40px;
+  padding-left: var(--oim-space-3);
   text-align: center;
 }
 
-.oim-key-body svg,
-.oim-key-body img {
+.oim-key-panel .oim-panel-body svg,
+.oim-key-panel .oim-panel-body img {
   margin-left: auto;
   margin-right: auto;
   vertical-align: middle;
 }
 
-/* Dark theme: sprite icons are dark – invert so they're visible on dark panel */
-.oim-key-body img.oim-key-symbol {
+/* Dark theme: sprite icons are dark – invert so they're visible */
+.oim-key-panel .oim-panel-body img.oim-key-symbol {
   filter: invert(1);
 }

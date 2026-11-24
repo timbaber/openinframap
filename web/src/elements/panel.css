@@ -1,0 +1,90 @@
+/* Shared panel shell — card (Layers) and float (Key) */
+
+.oim-panel {
+  background: var(--oim-ctrl-bg);
+  border: 1px solid var(--oim-ctrl-border);
+  border-radius: var(--oim-panel-radius, var(--oim-ctrl-radius));
+  box-shadow: var(--oim-ctrl-shadow);
+  backdrop-filter: var(--oim-blur);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: var(--oim-text-color);
+}
+
+.oim-panel--card {
+  width: var(--oim-panel-card-width);
+  max-width: min(var(--oim-panel-card-width), 92vw);
+  height: var(--oim-panel-card-height-compact);
+  max-height: var(--oim-panel-card-height-compact);
+}
+
+.oim-panel--card.oim-panel--tall {
+  height: var(--oim-panel-card-height-tall);
+  max-height: var(--oim-panel-card-height-tall);
+}
+
+.oim-panel--card.oim-panel--collapsed {
+  width: auto;
+  min-width: var(--oim-hit);
+  height: auto;
+  max-height: none;
+}
+
+.oim-panel--float {
+  position: absolute;
+  z-index: 1000;
+  width: var(--oim-panel-float-width);
+  max-width: min(92vw, 40rem);
+  max-height: min(80vh, 40rem);
+  display: none;
+}
+
+.oim-panel--float.oim-panel--open {
+  display: flex;
+}
+
+.oim-panel-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--oim-space-2);
+  padding: var(--oim-panel-pad);
+  background: var(--oim-light-grey);
+  border-bottom: 1px solid var(--oim-ctrl-border);
+  min-height: var(--oim-hit);
+}
+
+.oim-panel-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.oim-panel-close {
+  flex-shrink: 0;
+  width: var(--oim-hit);
+  height: var(--oim-hit);
+  margin: calc(var(--oim-space-1) * -1);
+  border: 0;
+  background: transparent;
+  color: var(--oim-text-color);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--oim-radius-small);
+}
+
+.oim-panel-close:hover {
+  background: var(--oim-ctrl-hover-bg);
+}
+
+.oim-panel-body {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: var(--oim-panel-pad);
+}

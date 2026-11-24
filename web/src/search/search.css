@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  max-width: min(50vw, 15em);
+  max-width: min(50vw, 18em);
 
   input {
     color: var(--oim-text-color);
@@ -12,13 +12,13 @@
     background-repeat: no-repeat;
     background-size: 1.2em;
     background-position-y: center;
-    background-position-x: 10px;
+    background-position-x: var(--oim-space-3);
     border: 1px solid var(--oim-ctrl-border);
-    border-radius: 10px;
+    border-radius: var(--oim-panel-radius);
     box-shadow: var(--oim-ctrl-shadow);
-    height: 2.25rem;
+    height: var(--oim-hit);
     font-size: 0.95rem;
-    padding: 0.5em 12px 0.5em 2.25em;
+    padding: var(--oim-space-2) var(--oim-space-3) var(--oim-space-2) 2.4em;
     width: 100%;
     backdrop-filter: var(--oim-blur);
     transition: box-shadow 0.15s ease, border-color 0.15s ease;
@@ -64,7 +64,8 @@
 
   li,
   .oim-search-footer {
-    padding: 0.3rem 1rem;
+    padding: var(--oim-space-2) var(--oim-space-4);
+    min-height: calc(var(--oim-hit) - 4px);
   }
 }
 

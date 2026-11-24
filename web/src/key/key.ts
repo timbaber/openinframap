@@ -32,6 +32,7 @@ import {
 import { svgLine, svgLineFromLayer, svgRectFromLayer } from './svg.js'
 import './key.css'
 import { manifest } from 'virtual:render-svg'
+import { OimPanel } from '../elements/panel.js'
 
 const line_thickness = 6
 
@@ -56,7 +57,7 @@ const Tr = list.extend('tr', Td)
 class KeyControl implements IControl {
   _map: maplibregl.Map | undefined
   _control!: HTMLButtonElement
-  _container!: HTMLDivElement
+  _panel!: OimPanel
   _pane: RedomElement | undefined
   onAdd(map: maplibregl.Map) {
     this._map = map
@@ -67,25 +68,27 @@ class KeyControl implements IControl {
       ariaLabel: t('key.name')
     })
 
-    this._container = el('div', { class: 'oim-key-panel' })
+    this._panel = new OimPanel({
+      id: 'key',
+      variant: 'float',
+      title: t('key.name', 'Key'),
+      showClose: true,
+      dismissOnOutside: true,
+      dismissOnEscape: true,
+      excludeFromOutside: () => this._control
+    })
+    this._panel.el.classList.add('oim-key-panel')
 
     this.populate()
-    mount(document.body, this._container)
+    mount(document.body, this._panel.el)
 
     this._control.onclick = () => {
-      const button_position = this._control.getBoundingClientRect()
-      const panel_height = 70 * window.innerHeight / 100
-      const space_below = window.innerHeight - button_position.bottom
-      const open_down = space_below >= panel_height || space_below >= button_position.top
-      if (open_down) {
-        this._container.style.top = button_position.bottom + 'px'
-        this._container.style.bottom = 'auto'
-      } else {
-        this._container.style.bottom = (window.innerHeight - button_position.top) + 'px'
-        this._container.style.top = 'auto'
+      if (this._panel.isOpen) {
+        this._panel.close()
+        return
       }
-      this._container.style.right = (document.documentElement.clientWidth - button_position.right) + 'px'
-      this._container.classList.add('visible')
+      this._panel.positionNear(this._control)
+      this._panel.open()
     }
 
     return el('div', this._control, {
@@ -95,24 +98,14 @@ class KeyControl implements IControl {
 
   onRemove(): void {
     this._map = undefined
-    this._container.remove()
+    this._panel.destroy()
     this._control.remove()
     this._pane = undefined
   }
 
-  header() {
-    const close_button = el('button.oim-key-close', '×')
-
-    close_button.onclick = () => {
-      this._container.classList.remove('visible')
-    }
-    return el('.oim-key-header', el('h2', t('key.name', 'Key')), close_button)
-  }
-
   async populate() {
-    mount(this._container, this.header())
-
-    const pane = el('.oim-key-body')
+    const pane = this._panel.bodyEl
+    pane.replaceChildren()
     pane.appendChild(el('h3', t('key.power-lines', 'Power Lines')))
     mount(pane, await this.voltageTable())
     pane.appendChild(el('h3', t('key.power-plants', 'Power Plants')))
@@ -134,8 +127,6 @@ class KeyControl implements IControl {
     pane.appendChild(el('h3', t('layers.other-pipelines', 'Other Pipelines')))
     mount(pane, this.otherPipelineTable())
     this._pane = pane
-
-    mount(this._container, pane)
   }
 
   async voltageTable() {

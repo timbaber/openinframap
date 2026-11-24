@@ -93,8 +93,9 @@ export default class OpenInfraMap {
     map.addControl(new maplibregl.ScaleControl({}), 'bottom-left')
     map.addControl(new ImageryInfoControl(), 'bottom-left')
 
-    map.addControl(unified_map_options, 'top-right')
+    // Key above Layers so the expanding Layers card does not cover the Key trigger
     map.addControl(new KeyControl(), 'top-right')
+    map.addControl(unified_map_options, 'top-right')
     map.addControl(new EditButton(), 'bottom-right')
     map.addControl(new OIMSearch(), 'top-left')
     new InfoPopup(

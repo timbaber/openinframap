@@ -110,4 +110,62 @@ describe('Layers panel map-first behavior', () => {
     )
     expect(tall).toBe(false)
   })
+
+  test('opens as card shell with comfortable width', async () => {
+    const isCollapsed = await page.$eval('.oim-unified-options .oim-unified-panel', (el) =>
+      el.classList.contains('oim-unified-panel-collapsed')
+    )
+    if (isCollapsed) {
+      await page.click('.oim-unified-header-icon')
+    }
+    const info = await page.$eval('.oim-unified-options', (el) => {
+      const styles = getComputedStyle(el)
+      return {
+        isCard: el.classList.contains('oim-panel--card'),
+        width: parseFloat(styles.width)
+      }
+    })
+    expect(info.isCard).toBe(true)
+    expect(info.width).toBeGreaterThanOrEqual(280)
+  })
+})
+
+describe('Key panel and mutual exclusion', () => {
+  beforeAll(async () => {
+    await page.goto(url, {
+      waitUntil: 'networkidle0',
+      timeout: 30000
+    })
+    await page.waitForSelector('.oim-key-control')
+  }, 30000)
+
+  test('Key opens as float shell', async () => {
+    await page.click('.oim-key-control')
+    await page.waitForSelector('.oim-panel--float.oim-panel--open')
+    const info = await page.$eval('.oim-panel--float.oim-panel--open', (el) => {
+      const styles = getComputedStyle(el)
+      return {
+        width: parseFloat(styles.width),
+        hasBodyPad: parseFloat(getComputedStyle(el.querySelector('.oim-panel-body')!).paddingLeft) >= 12
+      }
+    })
+    expect(info.width).toBeGreaterThanOrEqual(280)
+    expect(info.hasBodyPad).toBe(true)
+    await page.keyboard.press('Escape')
+  })
+
+  test('opening Key closes Layers', async () => {
+    await page.click('.oim-unified-header-icon')
+    const layersOpen = await page.$eval('.oim-unified-options .oim-unified-panel', (el) =>
+      !el.classList.contains('oim-unified-panel-collapsed')
+    )
+    expect(layersOpen).toBe(true)
+    await page.click('.oim-key-control')
+    await page.waitForSelector('.oim-panel--float.oim-panel--open', { timeout: 10000 })
+    const layersCollapsed = await page.$eval('.oim-unified-options .oim-unified-panel', (el) =>
+      el.classList.contains('oim-unified-panel-collapsed')
+    )
+    expect(layersCollapsed).toBe(true)
+    await page.keyboard.press('Escape')
+  }, 15000)
 })

@@ -17,6 +17,10 @@ import {
   DEFAULT_SUBSTATION_SELECTED,
   DEFAULT_VOLTAGE_BAND_SELECTED
 } from './power-plant-filter.js'
+import {
+  notifyPanelOpened,
+  registerExclusivePanel
+} from './elements/panel.js'
 
 /** Single layer option for URL hash and visibility (id, prefix, optional groupId for radio groups) */
 interface LayerSpec {
@@ -92,6 +96,7 @@ export default class UnifiedMapOptionsControl implements maplibregl.IControl {
   _plantOriginalFilters: Record<string, FilterSpecification | undefined> = {}
   _substationOriginalFilters: Record<string, FilterSpecification | undefined> = {}
   _powerLineOriginalFilters: Record<string, FilterSpecification | undefined> = {}
+  _unregisterExclusive: (() => void) | null = null
 
   _onDocumentPointerDown = (e: PointerEvent) => {
     if (!this._panelOpen || !this._container) return
@@ -264,21 +269,24 @@ export default class UnifiedMapOptionsControl implements maplibregl.IControl {
   _setPanelOpen(open: boolean): void {
     this._panelOpen = open
     this._panel.classList.toggle('oim-unified-panel-collapsed', !open)
+    this._container.classList.toggle('oim-panel--collapsed', !open)
+    this._container.classList.toggle('oim-panel--open', open)
     this._header.setAttribute('aria-expanded', String(open))
     this._detachDismissListeners()
     if (open) {
+      notifyPanelOpened('layers')
       this._applySectionDefaults()
       this._syncTallMode()
       document.addEventListener('pointerdown', this._onDocumentPointerDown, true)
       document.addEventListener('keydown', this._onDocumentKeyDown, true)
     } else {
-      this._container.classList.remove('oim-unified-options--tall')
+      this._container.classList.remove('oim-unified-options--tall', 'oim-panel--tall')
     }
   }
 
   _syncTallMode(): void {
     if (!this._container || !this._panelOpen) {
-      this._container?.classList.remove('oim-unified-options--tall')
+      this._container?.classList.remove('oim-unified-options--tall', 'oim-panel--tall')
       return
     }
     const anyPowerOpen = Array.from(
@@ -288,6 +296,7 @@ export default class UnifiedMapOptionsControl implements maplibregl.IControl {
       return list !== null && !list.classList.contains('oim-unified-list-collapsed')
     })
     this._container.classList.toggle('oim-unified-options--tall', anyPowerOpen)
+    this._container.classList.toggle('oim-panel--tall', anyPowerOpen)
   }
 
   _applySectionDefaults(): void {
@@ -342,7 +351,9 @@ export default class UnifiedMapOptionsControl implements maplibregl.IControl {
     header.style.backgroundPosition = 'center'
     header.style.backgroundSize = '20px 20px'
     this._header = header
-    this._panel = el('div', { class: 'oim-unified-panel oim-unified-panel-collapsed' })
+    this._panel = el('div', {
+      class: 'oim-unified-panel oim-panel-body oim-unified-panel-collapsed'
+    })
     this._panelOpen = false
 
     // Background (radio group)
@@ -487,7 +498,13 @@ export default class UnifiedMapOptionsControl implements maplibregl.IControl {
     })
 
     this._container = el('div', [header, this._panel], {
-      class: 'maplibregl-ctrl oim-unified-options'
+      class: 'maplibregl-ctrl oim-unified-options oim-panel oim-panel--card oim-panel--collapsed',
+      'data-oim-panel': 'layers'
+    })
+    this._unregisterExclusive = registerExclusivePanel({
+      id: 'layers',
+      close: () => this._setPanelOpen(false),
+      contains: (node) => this._container.contains(node)
     })
     this._syncPanelFromState()
     return this._container
@@ -612,7 +629,9 @@ export default class UnifiedMapOptionsControl implements maplibregl.IControl {
 
   onRemove(): void {
     this._detachDismissListeners()
-    this._container?.classList.remove('oim-unified-options--tall')
+    this._unregisterExclusive?.()
+    this._unregisterExclusive = null
+    this._container?.classList.remove('oim-unified-options--tall', 'oim-panel--tall')
     this._map = undefined
     this._container?.remove()
   }

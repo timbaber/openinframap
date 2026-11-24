@@ -33,6 +33,20 @@
   --oim-ctrl-accent: #60a5fa;
   --oim-ctrl-accent-hover: #93c5fd;
   --oim-ctrl-hover-bg: rgba(255, 255, 255, 0.08);
+
+  /* Shared spacing / panel shell */
+  --oim-space-1: 4px;
+  --oim-space-2: 8px;
+  --oim-space-3: 12px;
+  --oim-space-4: 16px;
+  --oim-ctrl-inset: 12px;
+  --oim-hit: 36px;
+  --oim-panel-pad: 12px 16px;
+  --oim-panel-radius: var(--oim-ctrl-radius);
+  --oim-panel-card-width: 22rem;
+  --oim-panel-float-width: min(28rem, 40vw);
+  --oim-panel-card-height-compact: min(52vh, 28rem);
+  --oim-panel-card-height-tall: min(80vh, 40rem);
 }
 
 * {
@@ -67,16 +81,20 @@ body,
 
 header {
   z-index: 2;
-  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
-  border-radius: 0px 0px 15px 0px;
+  padding: var(--oim-space-2) var(--oim-space-3) var(--oim-space-3);
+  border-radius: 0 0 var(--oim-panel-radius) 0;
   background-color: var(--oim-ctrl-bg);
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   min-width: 15rem;
   position: absolute;
   display: block;
   font-size: 13px;
   backdrop-filter: var(--oim-blur);
+  border: 1px solid var(--oim-ctrl-border);
+  border-top: none;
+  border-left: none;
+  box-shadow: var(--oim-ctrl-shadow);
 }
 
 nav ul {
@@ -136,8 +154,8 @@ th {
 }
 
 .maplibregl-ctrl-group button {
-  width: 29px !important;
-  height: 29px !important;
+  width: var(--oim-hit) !important;
+  height: var(--oim-hit) !important;
   transition: background-color 0.15s ease;
 }
 
@@ -166,15 +184,31 @@ th {
 }
 
 .maplibregl-ctrl-top-left {
-  top: 60px;
+  top: 64px;
+  left: var(--oim-ctrl-inset);
+}
+
+.maplibregl-ctrl-top-right {
+  top: var(--oim-ctrl-inset);
+  right: var(--oim-ctrl-inset);
 }
 
 .maplibregl-ctrl-top-left .maplibregl-ctrl {
-  margin: 0.5rem 0 0 0.5rem;
+  margin: var(--oim-space-2) 0 0 0;
 }
 
 .maplibregl-ctrl-top-right .maplibregl-ctrl {
-  margin: 0.5rem 0.5rem 0 0;
+  margin: 0 0 var(--oim-space-2) 0;
+}
+
+.maplibregl-ctrl-bottom-left {
+  bottom: var(--oim-ctrl-inset);
+  left: var(--oim-ctrl-inset);
+}
+
+.maplibregl-ctrl-bottom-right {
+  bottom: var(--oim-ctrl-inset);
+  right: var(--oim-ctrl-inset);
 }
 
 .maplibregl-ctrl-attrib {
@@ -273,45 +307,37 @@ canvas:focus {
   color: var(--oim-text-color-light);
 }
 
-/* Unified Map Options – single panel for layers + power filters (no overlap, one schema) */
-.oim-unified-options {
+/* Unified Map Options – card shell (Layers) */
+.oim-unified-options.oim-panel--card {
   background: var(--oim-ctrl-bg) !important;
   border: 1px solid var(--oim-ctrl-border) !important;
-  border-radius: var(--oim-ctrl-radius) !important;
+  border-radius: var(--oim-panel-radius) !important;
   box-shadow: var(--oim-ctrl-shadow) !important;
   backdrop-filter: var(--oim-blur);
   overflow: hidden;
-  min-width: 15rem;
-  max-width: 90vw;
-  /* Definite height so the flex panel (flex: 1 1 0) can grow and receive clicks */
-  height: 42vh;
-  max-height: 42vh;
+  min-width: var(--oim-panel-card-width);
+  max-width: min(var(--oim-panel-card-width), 92vw);
+  width: var(--oim-panel-card-width);
+  height: var(--oim-panel-card-height-compact);
+  max-height: var(--oim-panel-card-height-compact);
   display: flex;
   flex-direction: column;
 }
 
-.oim-unified-options.oim-unified-options--tall {
-  max-height: 70vh;
-  height: 70vh;
-}
-
-/* Compact density (not applied in tall mode) */
-.oim-unified-options:not(.oim-unified-options--tall) .oim-unified-row {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.oim-unified-options:not(.oim-unified-options--tall) .oim-unified-section-header {
-  padding-top: 6px;
-  padding-bottom: 4px;
+.oim-unified-options.oim-panel--card.oim-unified-options--tall,
+.oim-unified-options.oim-panel--card.oim-panel--tall {
+  height: var(--oim-panel-card-height-tall);
+  max-height: var(--oim-panel-card-height-tall);
 }
 
 /* When panel is collapsed, shrink to icon-only size */
-.oim-unified-options:has(.oim-unified-panel-collapsed) {
+.oim-unified-options.oim-panel--card:has(.oim-unified-panel-collapsed),
+.oim-unified-options.oim-panel--collapsed {
   height: auto;
   min-height: 0;
   max-height: none;
-  min-width: 29px;
+  min-width: var(--oim-hit);
+  width: auto;
 }
 
 .oim-unified-options button {
@@ -321,12 +347,12 @@ canvas:focus {
   display: flex !important;
 }
 
-/* Icon-only header (layers stack): same 29×29 size as Key, no text */
+/* Icon-only header (layers stack): hit-target size, no text */
 .oim-unified-options .oim-unified-header.oim-unified-header-icon {
-  width: 29px !important;
-  height: 29px !important;
-  min-width: 29px;
-  min-height: 29px;
+  width: var(--oim-hit) !important;
+  height: var(--oim-hit) !important;
+  min-width: var(--oim-hit);
+  min-height: var(--oim-hit);
   padding: 0;
   border: none;
   border-bottom: 1px solid var(--oim-ctrl-border);
@@ -384,7 +410,8 @@ canvas:focus {
   transform: rotate(-90deg);
 }
 
-.oim-unified-panel {
+.oim-unified-panel,
+.oim-unified-options .oim-panel-body {
   flex: 1 1 0;
   min-height: 0;
   overflow-y: auto;
@@ -410,7 +437,7 @@ canvas:focus {
   text-align: left;
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 8px 14px 6px;
+  padding: var(--oim-space-3) var(--oim-space-4);
   margin: 0;
   border: none;
   background: var(--oim-ctrl-hover-bg);
@@ -423,7 +450,7 @@ canvas:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--oim-space-2);
   white-space: normal;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -469,12 +496,13 @@ canvas:focus {
 .oim-unified-row {
   display: flex;
   align-items: center;
-  font-size: 0.85rem;
-  padding: 6px 14px 6px 10px;
+  font-size: 0.9rem;
+  padding: var(--oim-space-2) var(--oim-space-4);
   cursor: pointer;
   border-radius: var(--oim-radius-small);
-  margin: 0 6px;
+  margin: 0 var(--oim-space-1);
   transition: background-color 0.15s ease;
+  min-height: calc(var(--oim-hit) - 4px);
 }
 
 .oim-unified-row:hover {
@@ -689,7 +717,7 @@ canvas:focus {
 
 /* Imagery / map data overlay (bottom-left) – collapsible pill, collapsed by default */
 .oim-imagery-info {
-  margin: 0 0 10px 10px;
+  margin: 0 0 var(--oim-space-2) 0;
   padding: 0;
   border: none;
   background: transparent;
